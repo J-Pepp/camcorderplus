@@ -1,0 +1,94 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# camcorderplus
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of camcorderplus is to provide an extension to the functionality of {camcorder} by Ellis Hughes (doi:10.32614/CRAN.package.camcorder).
+
+NOTE: Accessing internal camcorder:::get_file_records().
+Used because there's no exported equivalent at the time of writing (2025-06).
+May break if camcorder changes internal API.
+
+
+## Installation
+
+You can install the development version of camcorderplus like so:
+
+```{undefined eval=FALSE, include=TRUE}
+# install.packages("remotes")
+remotes::install_github("yourusername/camcorderplus")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r include=FALSE}
+unlink(file.path(tempdir(), "gg_history_export"), recursive = TRUE)
+```
+
+
+```{r example}
+library(camcorderplus)
+library(ggplot2)
+library(camcorder)
+
+# Clean temp directory before use
+unlink(file.path(tempdir(), "gg_history_export"), recursive = TRUE)
+
+# Start recording
+gg_record(device = "tiff", height = 10, width = 10, units = "cm")
+
+# First plot
+ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_point(size = 3) +
+  scale_color_viridis_d() +
+  theme_minimal(base_size = 14) +
+  ggtitle("MTCars: MPG vs Weight")
+
+# Resize recording dimensions
+gg_history_resize(height = 4, width = 7, units = "in")
+
+# Second plot
+ggplot(as.data.frame(Titanic), aes(x = Class, y = Freq, fill = Survived)) +
+  geom_col(position = "dodge") +
+  scale_fill_brewer(palette = "Paired") +
+  theme_light(base_size = 16) +
+  ggtitle("Titanic: Class vs Survival")
+
+# Export all recorded plots
+gg_history_export(create_export_folder = TRUE)
+```
+
+Images that were exported from the example above
+
+```{r exported-images, echo = FALSE, results = "asis"}
+img_dir <- file.path(tempdir(), "gg_history_export")
+img_files <- list.files(img_dir, pattern = "\\.(png|jpe?g|bmp|tiff?)$", ignore.case = TRUE, full.names = TRUE)
+
+# Create output directory where README.md will look for images
+out_dir <- "man/figures/exported"
+dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
+
+# Copy and embed images using markdown
+for (img in img_files) {
+  new_path <- file.path(out_dir, basename(img))
+  file.copy(img, new_path, overwrite = TRUE)
+  cat(sprintf("![](%s)\n\n", new_path))
+}
+```

@@ -9,8 +9,7 @@ Authors@R: c(
       role = c("aut", "cre")
     )
   )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
+Description: An extension of {camcorder} by Ellis Hughes (doi:10.32614/CRAN.package.camcorder).
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

@@ -7,9 +7,13 @@
 gg_history_resize(height = NA, width = NA, units = NA, dpi = NA)
 }
 \arguments{
-\item{dpi}{Plot resolution. Also accepts a string input: "retina" (320), "print" (300), or "screen" (72). Applies only to raster output types.}
+\item{height}{Height of the resized plot}
 
-\item{width/height/units}{Plot size in units ("in", "cm", "mm", or "px"). If not supplied, uses the size of current graphics device.}
+\item{width}{Width of the resized plot}
+
+\item{units}{Plot size units ("in", "cm", "mm", or "px"). If not supplied, uses the size of current graphics device.}
+
+\item{dpi}{Plot resolution. Also accepts a string input: "retina" (320), "print" (300), or "screen" (72). Applies only to raster output types.}
 }
 \description{
 Adaptation of camcorder::gg_resize_film that provides allows for altering the exported image size, overwriting previosuly saved settings. This function has been wholly adapted from package:camcorder, with only minor changes regarding package calls and reprinting the previous plot.

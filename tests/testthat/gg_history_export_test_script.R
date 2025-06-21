@@ -1,6 +1,4 @@
-
 library(ggplot2)
-library(dplyr)
 
 camcorder::gg_record(device = "tiff")
 
@@ -79,7 +77,7 @@ ggplots <- list(
   {
     co2_df <- as.data.frame(CO2)
     co2_summary <- co2_df %>%
-      group_by(conc) %>%
+      dplyr::group_by(conc) %>%
       dplyr::summarise(uptake = mean(uptake))
     ggplot(co2_summary, aes(x = conc, y = uptake)) +
       geom_area(fill = "skyblue") +

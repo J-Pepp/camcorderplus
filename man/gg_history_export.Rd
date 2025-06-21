@@ -35,3 +35,20 @@ gg_history_export(
 \description{
 Adaptation of camcorder::gg_playback that provides options to export in additional formats. This functions requires the use of camcorder::gg_record to generate the images for export.
 }
+\examples{
+\dontrun{
+  library(ggplot2)
+  library(camcorder)
+
+  gg_record(device = "tiff")
+
+  ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
+    geom_point(size = 3) +
+    scale_color_viridis_d() +
+    theme_minimal(base_size = 14) +
+    ggtitle("MTCars: MPG vs Weight")
+
+  gg_history_export(create_export_folder = TRUE)
+}
+
+}

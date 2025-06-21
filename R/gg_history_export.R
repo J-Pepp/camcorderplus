@@ -7,23 +7,24 @@
 #' @importFrom progress progress_bar
 #' @importFrom utils packageVersion
 #'
-#' @param name The base name for export files.
-#' @param export_device Image format to export (e.g., "png").
-#' @param to_powerpoint Whether to export to PowerPoint.
-#' @param to_zip Whether to zip exported files.
+#' @param to_powerpoint Export recorded ggplots to a powerpoint presentation. Images will be converted to png.
+#' @param to_zip Export recorded ggplots to a zip folder.
 #' @param ppt_name Name of the PowerPoint file.
 #' @param zip_name Name of the zip file.
 #' @param export_folder Destination folder for exports.
-#' @param create_export_folder Create the folder if it doesn't exist.
-#' @param progress Show a progress bar.
-#' @param stoprecording Stop recording after export?
-#' @param regex_pattern Optional regex filter for plots.
-#' @param ... Additional arguments passed to export functions.
+#' @param create_export_folder Create the export folder (and applicable path) if it doesn't exist.
+#' @param stoprecording Stop camcorder::gg_record from recording any additional plots after gg_history_export is finished exporting.
+#' @param regex_pattern Optional regex filter for plots if change to file name recognition required.
 #'
 #' @export
 
-gg_history_export <- function(name = NULL, export_device = c("png", "pdf", "jpeg", "bmp", "tiff", "emf", "svg", "eps", "ps"),
-                              to_powerpoint = TRUE, to_zip = TRUE, ppt_name = NULL, zip_name = NULL, export_folder = NULL, create_export_folder = FALSE, progress = interactive(), stoprecording = FALSE, regex_pattern = "\\d{4}_\\d{2}_\\d{2}_\\d{2}_\\d{2}_\\d{2}\\.\\d+", ...) {
+gg_history_export <- function(to_powerpoint = TRUE, to_zip = TRUE, ppt_name = NULL, zip_name = NULL, export_folder = NULL, create_export_folder = FALSE, stoprecording = FALSE, regex_pattern = "\\d{4}_\\d{2}_\\d{2}_\\d{2}_\\d{2}_\\d{2}\\.\\d+") {
+
+  #### Stop recording ####
+  if (stoprecording) {
+    camcorder::gg_stop_recording()
+    message("camcorder::gg_record stopped. No further plots will be retained after this function.")
+  }
 
   #### Checks `camcorder` version ####
   if(packageVersion("camcorder") != "0.1.0") {warning("package:camcorderplus has not be tested on versions of camcorder except version '0.1.0'")}
@@ -47,7 +48,7 @@ gg_history_export <- function(name = NULL, export_device = c("png", "pdf", "jpeg
   #### Gets path to saved images ####
   records <- camcorder:::get_file_records(full_path = TRUE)
   if (length(records) == 0) {
-    warning("No images recorded to playback.")
+    warning("No images recorded to playback. Please check that camcorder::gg_record was correctly called.")
     invisible()
   }
 
@@ -59,6 +60,7 @@ gg_history_export <- function(name = NULL, export_device = c("png", "pdf", "jpeg
     dir.create(ppt_png)
 
     # Converts images into png using the same file name as gg_record originally writes using regex
+    warning("A copy of all exported images will be converted into png formart for inclusion in the powerpoint. \nAll original quality images can be found in the final export folder, and/or zip file (if applicable).")
     for (image_path in records) {
       image <- magick::image_read(path = image_path)
       image <- magick::image_write(image = image,
@@ -112,7 +114,7 @@ gg_history_export <- function(name = NULL, export_device = c("png", "pdf", "jpeg
       pb$tick()
       }
 
-    #### Saves created powerpoint ####
+    # Saves created powerpoint #
     if (is.null(ppt_name)) {
       print(ppt, target = base::file.path(export_folder, paste0(format(Sys.time(), "%Y.%m.%d-%H.%M.%S"),
                                            "_exported_ggplots.pptx")))
@@ -128,7 +130,7 @@ gg_history_export <- function(name = NULL, export_device = c("png", "pdf", "jpeg
     files <- list.files(recording_dir, full.names = TRUE)
     recorded_files <- files[grepl(regex_pattern, basename(files))]
 
-    #### Creates and saves zip file ####
+    # Creates and saves zip file #
     if (is.null(zip_name)) {
       zip::zip(files = recorded_files, zipfile =  base::file.path(export_folder, paste0(format(Sys.time(), "%Y.%m.%d-%H.%M.%S"),
                                                           "_exported_ggplots.", camcorder:::GG_RECORDING_ENV$device_ext, ".zip")), mode = "cherry-pick")

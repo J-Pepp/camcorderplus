@@ -25,5 +25,5 @@ Imports:
     officer,
     zip,
     progress
-URL: https://github.com/J-Pepp/camcorderplus
-BugReports: https://github.com/J-Pepp/camcorderplus/issues
+URL: https://github.com/J-Pepp/camcorderplus, https://github.com/youruser/yourrepo
+BugReports: https://github.com/youruser/yourrepo/issues

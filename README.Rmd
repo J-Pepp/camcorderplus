@@ -31,7 +31,7 @@ You can install the development version of camcorderplus like so:
 
 ```{undefined eval=FALSE, include=TRUE}
 # install.packages("remotes")
-remotes::install_github("yourusername/camcorderplus")
+remotes::install_github("J-Pepp/camcorderplus")
 ```
 
 ## Example

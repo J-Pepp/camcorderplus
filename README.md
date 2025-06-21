@@ -21,7 +21,7 @@ You can install the development version of camcorderplus like so:
 
 ``` undefined
 # install.packages("remotes")
-remotes::install_github("yourusername/camcorderplus")
+remotes::install_github("J-Pepp/camcorderplus")
 ```
 
 ## Example
@@ -61,24 +61,24 @@ gg_history_export(create_export_folder = TRUE)
 #> `GG_RECORDING_ENV` obtained from {camcorder} and assigned to `camcorder_GG_RECORDING_ENV`
 #> Warning in gg_history_export(create_export_folder = TRUE): As `export_folder`
 #> has been left blank, an export folder may be created at
-#> 'C:/Users/Jack/AppData/Local/Temp/RtmpYRGqH1/gg_history_export'.
+#> 'C:/Users/Jack/AppData/Local/Temp/RtmpMxjiTZ/gg_history_export'.
 #> Warning in gg_history_export(create_export_folder = TRUE): Export destination
-#> `C:\Users\Jack\AppData\Local\Temp\RtmpYRGqH1/gg_history_export` is not a valid
+#> `C:\Users\Jack\AppData\Local\Temp\RtmpMxjiTZ/gg_history_export` is not a valid
 #> directory, or does not exist.
 #> Warning in gg_history_export(create_export_folder = TRUE): An export folder was
-#> created at 'C:/Users/Jack/AppData/Local/Temp/RtmpYRGqH1/gg_history_export'.
+#> created at 'C:/Users/Jack/AppData/Local/Temp/RtmpMxjiTZ/gg_history_export'.
 #> A copy of all exported images will be converted into png formart for inclusion in the powerpoint. 
 #> All original quality images can be found in the final export folder, and/or zip file (if applicable).
 #> All files moved successfully.
 #> File Export Completed.
-#> Files can be found in 'C:/Users/Jack/AppData/Local/Temp/RtmpYRGqH1/C:/Users/Jack/AppData/Local/Temp/RtmpYRGqH1/gg_history_export'
+#> Files can be found in 'C:/Users/Jack/AppData/Local/Temp/RtmpMxjiTZ/C:/Users/Jack/AppData/Local/Temp/RtmpMxjiTZ/gg_history_export'
 #> The export folder contains the following files:
-#> 2025.06.21-22.24.10_exported_ggplots.pptx                    2025.06.21-22.24.10_exported_ggplots.tif.zip                
-#> 2025_06_21_22_24_08.527190.tif                               2025_06_21_22_24_08.895725.tif
+#> 2025.06.21-22.32.11_exported_ggplots.pptx                    2025.06.21-22.32.11_exported_ggplots.tif.zip                
+#> 2025_06_21_22_32_09.552606.tif                               2025_06_21_22_32_09.925369.tif
 ```
 
 Images that were exported from the example above
 
-![](man/figures/exported/2025_06_21_22_24_08.527190.tif)
+![](man/figures/exported/2025_06_21_22_32_09.552606.tif)
 
-![](man/figures/exported/2025_06_21_22_24_08.895725.tif)
+![](man/figures/exported/2025_06_21_22_32_09.925369.tif)

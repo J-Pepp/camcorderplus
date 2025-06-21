@@ -5,28 +5,20 @@
 \title{gg_history_export}
 \usage{
 gg_history_export(
-  name = NULL,
-  export_device = c("png", "pdf", "jpeg", "bmp", "tiff", "emf", "svg", "eps", "ps"),
   to_powerpoint = TRUE,
   to_zip = TRUE,
   ppt_name = NULL,
   zip_name = NULL,
   export_folder = NULL,
   create_export_folder = FALSE,
-  progress = interactive(),
   stoprecording = FALSE,
-  regex_pattern = "\\\\d{4}_\\\\d{2}_\\\\d{2}_\\\\d{2}_\\\\d{2}_\\\\d{2}\\\\.\\\\d+",
-  ...
+  regex_pattern = "\\\\d{4}_\\\\d{2}_\\\\d{2}_\\\\d{2}_\\\\d{2}_\\\\d{2}\\\\.\\\\d+"
 )
 }
 \arguments{
-\item{name}{The base name for export files.}
+\item{to_powerpoint}{Export recorded ggplots to a powerpoint presentation. Images will be converted to png.}
 
-\item{export_device}{Image format to export (e.g., "png").}
-
-\item{to_powerpoint}{Whether to export to PowerPoint.}
-
-\item{to_zip}{Whether to zip exported files.}
+\item{to_zip}{Export recorded ggplots to a zip folder.}
 
 \item{ppt_name}{Name of the PowerPoint file.}
 
@@ -34,15 +26,11 @@ gg_history_export(
 
 \item{export_folder}{Destination folder for exports.}
 
-\item{create_export_folder}{Create the folder if it doesn't exist.}
+\item{create_export_folder}{Create the export folder (and applicable path) if it doesn't exist.}
 
-\item{progress}{Show a progress bar.}
+\item{stoprecording}{Stop camcorder::gg_record from recording any additional plots after gg_history_export is finished exporting.}
 
-\item{stoprecording}{Stop recording after export?}
-
-\item{regex_pattern}{Optional regex filter for plots.}
-
-\item{...}{Additional arguments passed to export functions.}
+\item{regex_pattern}{Optional regex filter for plots if change to file name recognition required.}
 }
 \description{
 Adaptation of camcorder::gg_playback that provides options to export in additional formats. This functions requires the use of camcorder::gg_record to generate the images for export.
